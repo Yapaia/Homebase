@@ -1,0 +1,20 @@
+{
+  "name": "yapaia-homebase",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Die Webseite von Yapaia: Startseite, Modulseiten, Handbuch und Technik – in drei Designs.",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "bau": "node bau/bau.mjs",
+    "test": "node --test test/*.test.mjs",
+    "vorschau": "node bau/vorschau.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "5.1.1",
+    "@fontsource-variable/inter": "5.1.1",
+    "@fontsource-variable/nunito": "5.1.1",
+    "@fontsource-variable/space-grotesk": "5.1.1",
+    "marked": "14.1.4"
+  }
+}

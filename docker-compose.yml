@@ -1,0 +1,26 @@
+# Yapaia Homebase auf dem VPS – zusammen mit dem Kartenserver.
+#
+#   cp .env.beispiel .env     # Domain eintragen
+#   docker compose up -d
+#
+# Die Homebase ist die „Haustür“ des VPS: Sie belegt die Ports 80 und 443,
+# holt die Zertifikate (Let's Encrypt) und leitet die Kartenserver-Domain an
+# den Kartenserver weiter. Der Kartenserver selbst läuft OHNE eigenes HTTPS
+# und lauscht nur lokal (BINDEN=127.0.0.1 in dessen .env) – so kommen sich die
+# beiden nie in die Quere.
+services:
+  homebase:
+    image: ghcr.io/yapaia/homebase:latest
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    # Host-Netz: Caddy erreicht den Kartenserver unter 127.0.0.1:8080 und
+    # sieht die echten Adressen der Besucher.
+    network_mode: host
+    volumes:
+      - zertifikate:/data
+      - caddy-konfig:/config
+
+volumes:
+  zertifikate:
+  caddy-konfig:
